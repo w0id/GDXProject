@@ -22,7 +22,6 @@ public class MyGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		batmanAnim = new AnimPlayer("runRight.png", 8, 1, 16.0f, Animation.PlayMode.LOOP);
-		batmanAnim = new AnimPlayer("batmanreturnofthejokersheet1.gif", 14, 4, 16.0f, Animation.PlayMode.LOOP);
 		label = new Label(100);
 		img = new Texture("badlogic.jpg");
 	}
