@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="75" height="49" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="26">
+ <tileset firstgid="1" name="1626794363_10-kartinkin-com-p-piksel-art-taili-art-krasivo-10" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
+  <image source="1626794363_10-kartinkin-com-p-piksel-art-taili-art-krasivo-10.png" width="1024" height="1024"/>
+ </tileset>
+ <layer id="1" name="Слой тайлов 1" width="75" height="49">
+  <data encoding="base64" compression="zlib">
+   eJztlG1yEkEQhpFlN4mCOZOQ3QQD3kkIJBrwPvpP8FvwMnoAH0ooO83sLjBbAmtP1VNLz9AzPe/MvJXKeqtWDUlW23dtCyLBCZzC2TI2rR7qpPXRfcekVdq5F1FbApdwBe3lvJpD1aoJLbiAeLkXidxXrPp843YKRc2/iq+hA1144aFVD/pwAwMYwi3cLeOBivW4TzzMiYta7x5GMIY3HlpNYAph8Ico+Pt7FWtCB1ljaXMXSRQ8rCNSfTP2OIcfHlpVmSeAWKwbq3XzNAxVrguZk/Yf1383QdeVCFZ9dWjA02A3rZ6R14SWYy+us3JpqLVLgvyzz7qzcp5N0fWsapVadaAbrN+VTbV6SW4P+movLq0SR7+O8+6WnsPnTbp0lXNrrUYw9tDqPbkTmKasoWtLe6daH3nWGpmXiL5t32Xa3ZLrSK1mMPfQ6lGNLwS1da10na77InNiR/0utFZZuma9y0XLWlOfWZ09Nmq7a6X9Smoi95F2Z7Z5M/oNFk3kWEfuoUi/SvOXvDuyDbvk+MwtNSvSr36eVypv4V0Jv7/Oi/WrsmtVpF+VXasi/arsWplfmV+ZX5lfHcPX/Mr8yvxq/1qZX5lfmV+ZXx3D1/zK/Mr8av9amV+ZX5lfmV8dw9f8yvzK/Gr/WplfmV8dol8taKJ1Cy4ggUu4gjY8h+tlvMtY/I/zssY60PW4Vwt65PfhBoZwC3fwCl7DPQxKMDaCsadWE/Kn8AE+wWf4Al/hG3yHjyUYm8HcU6tqiLdDDSI4gVM4g8fwBMISjNWhEXpq9Z9jzZq1w2i/ASZX06g=
+  </data>
+ </layer>
+ <layer id="11" name="Слой тайлов 6" width="75" height="49">
+  <data encoding="base64" compression="zlib">
+   eJzt0kmKAkEQQNEAdevWEfRWjtB9pXbjCHol3ThC91H6r2tXWomJ/Ad/V1lkBhEhSXrWshaxojVtaEu72rtvlaczc7nQlW50p8cHzCrFDrTqEW3qUJd61K9Xc993SrEDI+YypglNaUbzD5hVih1Ycn5Fa9rQlnYl/zloRAwbr92jail24Mz5C13pRj/NiEWz3D++mNN3ZrOqYgeKWryxTR3q0pE5nUrOas+5Q2azKu7AnR4vzmrEG8c0oSnNaF7y3b98/5fZrIo70KN+ZnfMRRU7IEmSJEmSJEmSJEmSJEmSpHT+AdR8NDM=
+  </data>
+ </layer>
+ <layer id="10" name="Слой тайлов 5" width="75" height="49">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJwCAQRcGcNGVYWkpLaZaSCsSwLh5kBv5t4e11AQB/POXsZXrL2cvUy3yZt5F+5I9Rb0Wr82XeRvqRP0a9FU+dL/M20o/8MeqteOt8mbeRfuSPUW9Fr3u3u5+p3Xu3uw8AAAAAAAAAAABwog/BrtKH
+  </data>
+ </layer>
+ <layer id="8" name="Слой тайлов 3" width="75" height="49">
+  <data encoding="base64" compression="zlib">
+   eJzt0EkOglAQhOF3AjiFJo630sTxVqDgcCtAcDiDtZPERfNkgdH/SyppSIcU7RwAAAC+1ShwbqxMlGnQbjfSu1jZKXslUVLjm5/06MpKvdbKRtkaHa3dTO9ypVAuSqlUDf/bp0dXDup1VE7K2eho7fZC5/rh63mgeRi+77Xt0ZWret2Uu/IwOlq7M91lXrvNQvOy4a18evyCSHeJa7dJNKcNb/VvMt0lr92m1FxxKwAAAAAAAAAAAAAAAAAAAG9PTX8wYw==
+  </data>
+ </layer>
+ <layer id="2" name="Слой тайлов 2" width="75" height="49">
+  <data encoding="base64" compression="zlib">
+   eJztlrlSG0EURbuMEjDMRAYbsxqM/RnzAyLDC5vAePsXAxm7jITE9i9GZKxCC94/wydRgHilAbUppOl3qk6im/S9quppYxRFURRFURRFuQkdnjGed9+naA7i7DSqW13BfyD/vsBOi1VbpVqMSeMWZjCL27iDu7iH+y13f+ZGI8dOh1VbldihjJf4HX/gT/yFv/EP/nVwqw6f+8q/+lt/zJgBHMRnOITD+BxH8AW+jN3PeSWW+K+XcQVXhfvENq8QZ6fRqq0S7DCDs/gO5/A9fsCP+Ak/N9BWR/Q7xhM8Fbra5hUW2GmxaqsUO6RxCzOYxW3cwV3cw/0G2uoR5+/ELnzs//+8Qo7ssEbeDIxx/lf4Gt8IXWzzKLFEv2VcwVWhq20eJY7od4wneCp0tc0VRbk9X1qNmW+tP3eJb+xwUGOLsNwlHrYZ095Wf+4KBd7eRSxhWXiHh+Uu0ct3vw/7cUB4A4TlLjFF/2lM4IywRVjuEl/pv4kpTAtbhOUuUaB/EUtYFrYIy12D71zAdy6oN3cJ3k8B76eg3twleJcH8zW2CMsVRVHugjPfBOeYxwv/+h1km0eJNfqt4wYmha62eZR4S79xnMBJoattHiWe0K8bn2KP0NU2jxJnHvcN5vHCE+4jyzxKrNFvHTcwKXS1zRVFURRFUZqFfw9CtYU=
+  </data>
+ </layer>
+ <objectgroup id="3" name="Слой объектов 1">
+  <object id="2" name="camera" x="655" y="469">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="4" name="монетки">
+  <object id="6" x="369" y="266">
+   <point/>
+  </object>
+  <object id="7" x="266" y="478">
+   <point/>
+  </object>
+  <object id="12" x="432" y="432">
+   <point/>
+  </object>
+  <object id="13" x="723" y="595">
+   <point/>
+  </object>
+  <object id="14" x="500" y="179">
+   <point/>
+  </object>
+  <object id="15" x="653" y="210">
+   <point/>
+  </object>
+  <object id="16" x="996" y="433">
+   <point/>
+  </object>
+ </objectgroup>
+</map>
