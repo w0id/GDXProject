@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class MyGame extends ApplicationAdapter {
 	private SpriteBatch batch;
@@ -109,13 +110,22 @@ public class MyGame extends ApplicationAdapter {
 		batch.draw(chip.getFrame(), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 		label.draw(batch, "Монеток собрано: "+String.valueOf(score), 0, 0);
 
-		for (int i=0;i<coinList.size();i++){
-			coinList.get(i).draw(batch, camera);
-			if (coinList.get(i).isOverlaps(chip.getRect(), camera)) {
-				coinList.remove(i);
+		ListIterator<Coin> iterator = coinList.listIterator();
+		while (iterator.hasNext()) {
+			Coin current = iterator.next();
+			current.draw(batch, camera);
+			if (current.isOverlaps(chip.getRect(), camera)) {
+				iterator.remove();
 				score++;
 			}
 		}
+//		for (int i=0;i<coinList.size();i++){
+//			coinList.get(i).draw(batch, camera);
+//			if (coinList.get(i).isOverlaps(chip.getRect(), camera)) {
+//				coinList.remove(i);
+//				score++;
+//			}
+//		}
 
 		batch.end();
 
