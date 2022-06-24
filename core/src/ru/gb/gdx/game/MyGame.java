@@ -15,8 +15,11 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
@@ -40,11 +43,72 @@ public class MyGame extends ApplicationAdapter {
 
 	private int score;
 
+	private World world;
+	private Box2DDebugRenderer debugRenderer;
+	private boolean start =false;
+	private Body heroBody;
+
 	@Override
 	public void create () {
+
+		world = new World(new Vector2(0,-9.81f), true);
+		debugRenderer = new Box2DDebugRenderer();
+
+		BodyDef def = new BodyDef();
+		FixtureDef fdef = new FixtureDef();
+		PolygonShape polygonShape = new PolygonShape();
+
+		def.position.set(new Vector2(270f,250f));
+		def.type = BodyDef.BodyType.StaticBody;
+		fdef.density = 100f;
+		fdef.friction = 17f;
+//		fdef.restitution = 1f;
+
+		polygonShape.setAsBox(100,10);
+		fdef.shape = polygonShape;
+
+		world.createBody(def).createFixture(fdef);
+
+		def.position.set(new Vector2(130f,350f));
+
+		polygonShape.setAsBox(100,10, new Vector2(0,0), 45 * MathUtils.radiansToDegrees);
+//		polygonShape.setAsBox(100,10);
+		fdef.shape = polygonShape;
+
+		world.createBody(def).createFixture(fdef);
+
+		def.type = BodyDef.BodyType.DynamicBody;
+//		for (int i = 0; i < 10; i++) {
+//			def.position.set(new Vector2(MathUtils.random(100f, 200f), 500f));
+////		def.position.set(new Vector2(150f, 450f));
+//			def.gravityScale = MathUtils.random(0.5f, 500f);
+//			float size = MathUtils.random(3f, 15f);
+//			polygonShape.setAsBox(size,size);
+//			fdef.shape = polygonShape;
+//			fdef.density = 100f;
+//			fdef.friction = 0f;
+//			world.createBody(def).createFixture(fdef);
+////		Body body = world.createBody(def);
+////		body.createFixture(fdef);
+//		}
+
+		def.position.set(new Vector2(270f,265));
+		def.gravityScale = 4f;
+		float size = 5;
+		polygonShape.setAsBox(0f,0f);
+		fdef.shape = polygonShape;
+		fdef.density = 0f;
+		fdef.friction = 1f;
+		fdef.restitution = 0.2f;
+		heroBody = world.createBody(def);
+		heroBody.createFixture(fdef);
+
+
+		polygonShape.dispose();
+
 		chip = new Pers();
 		fon = new Texture("fon.png");
-		map = new TmxMapLoader().load("maps/map1.tmx");
+		map = new TmxMapLoader().load("maps/level1.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map);
 
 		foreGround = new int[1];
@@ -85,18 +149,29 @@ public class MyGame extends ApplicationAdapter {
 
 		chip.setWalk(false);
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			heroBody.applyForceToCenter(new Vector2(-300.0f,0.0f), true);
 			camera.position.x-=SPEED;
 			chip.setDir(true);
 			chip.setWalk(true);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+			heroBody.applyForceToCenter(new Vector2(300.0f,0.0f), true);
 			camera.position.x+=SPEED;
 			chip.setDir(false);
 			chip.setWalk(true);
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)) camera.position.y+=SPEED;
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y-=SPEED;
+		if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+			heroBody.applyForceToCenter(new Vector2(0.0f,4000.0f), true);
+			camera.position.y+=SPEED;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+//			heroBody.applyForceToCenter(new Vector2(0.0f,-3000.0f), true);
+			camera.position.y-=SPEED;
+		}
+//		if (Gdx.input.isKeyPressed(Input.Keys.S)) start = true;
 
+		camera.position.x = heroBody.getPosition().x;
+		camera.position.y = heroBody.getPosition().y;
 		camera.update();
 
 		batch.begin();
@@ -149,12 +224,15 @@ public class MyGame extends ApplicationAdapter {
 //		renderer.setColor(heroClr);
 //		renderer.rect(heroRect.x, heroRect.y, heroRect.width, heroRect.height);
 //		renderer.end();
-
+//		if (start)
+			world.step(1/60.0f,3,3);
+		debugRenderer.render(world, camera.combined);
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
 		coinList.get(0).dispose();
+		world.dispose();
 	}
 }

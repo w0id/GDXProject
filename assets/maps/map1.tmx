@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="188" height="44" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="26">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="188" height="44" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="28">
  <properties>
   <property name="фон" value="fon.png"/>
  </properties>
@@ -14,7 +14,7 @@
  </tileset>
  <layer id="1" name="Слой тайлов 1" width="188" height="44">
   <data encoding="base64" compression="zlib">
-   eJztXMlOwzAQbfsTnChXTsD/3yjLDyDgBxDLvWw90YpEtUb2eCa2k7HznvTULM54bD+Pl0R9Wy4Wbwzf9wSAVvC05PkLvQMNwdX2tiP0DrQKxHdgTnBjOz3eQu9AY+BiO/QOtAbMZ4A5gcZz6B1oGYjvwJwAvQNzArdWhd6B1kD3HxHfgZZRy3zmbCW7BgAcuL0ZC3p/xfdsQEZYj+/fxv0D6gL0DswJoW9nrHxPAL2no1/nXHS/a3I+JyC+t4/bfR3dBXg/s/qD3heLj8bb/JGpv+fGy05h/X3TGHrfNd7m0PsR1vcjLei99vgPvR8RiuvQu/y+dUDvR0jm72uyjj/tzn+WRx5A33eeetb/vmtrj73eplTv1EcNdiRP6uNOUAehsrlwy9anjT2TAzXo/bKrB1dDvja9jNzn7B0Qiu/u7ws4iPTd7yeT9oukdfcM6X5i7XjYl3Wz5w3hpuO1c7wh99zza0/ajcee+0wsvoPDSeda3FhF00r2EK8c/Uv6Ao2HV8wzPnv0eV8aes2XBzfegPWx/1+TFL1L5iBcn7DIvp9C72V1N1WeKWtpid5r0411v7VaGVtb1v2B3uvxO6aVKWKn1n+ff2P6DL3X4zeni+1yfL3nGmtSfdaUG3qvw29pe46peU0+pfzaKu1D73X4rdWWNb+mmGeF8jxZgZaYQy/W5vGW9H7g+eqf7rF7jaaj10E9S9ehNc2PzVD5h9R76baS9KmSPozRp6X2U3Rbw57NVLZj8Tyl/bXPS9KW0KOmrJL6Sq0363q1XC6N/Vi7hY61Nrm0Ens560fqkyRdLt+srlM5H0Ic29fY/D3lXKupmOZL6N2XXhvPh5ZnqH+52rcVcv1J06dCbaltl9C4kHNOFLIzJC/N2DTUX0kZOH81Y/8U751qZKhdUrSUy6+SeUptlx7PYoSGy7V76TUYOJzQPQiCIAiCIAja4h9Bmu4v
+   eJztXMlOwzAQbfsTnChXTpT/v7UsP4CADwBRuJetJ1qRqNbIHs/EcTJ23pOemsUZj+3n8ZKo2/lstmX4fiAA1IKnOc9f6B2oCK62dw2hd6BWIL4DU4Ib2+nxDnoHKgMX26F3oDZgPgNMCTSeQ+9AzUB8B6YE6B2YEri1KvQO1Aa6/4j4DtSMUuYzFwvZNQDgwO3NWND7G/l+7QXfswEJsB7fv437B5QF6B2YEkLfzlj5ngB6T0e7zrlqfpfkfEpAfK8ft4c6ugvwfmL1B73PZh+Vt/kjU3/PlZedwvr7piH0vq+8zaH3E6zvR1rQe+nxH3o/IRTXoXf5feuA3k+QzN+XZB1/3pz/zE88gr7vPPes/33Xlh57rU2p3qmPGuxJntTHvaAOQmVz4ZatTRt7pg+UoPdVUw+uhnxtuorc5+wdEYrv7u8r2In03e8nk/aLpHX3DOl+Yul4OJR1c+AN4abh2jnekHvu+dqTduOx5z4Ti+9gd9K5FjdW0bSSPcRrR/+SvkDj4TXzjM8efd6Xhl7z5cGNN2B5bP/XJEXvkjkI1ycssu2n0Hte3Y2VZ8paWqL30nRj3W+tVobWlnV/oPdy/I5pZYzYqfXf59+QPkPv5fjN6WI3H17vfY01qT5ryg29l+G3tD2H1Lwmn1x+7ZT2ofcy/NZqy5pfY8yzQnmeLUBL7EMv1ubxlvR+5OXin+6xe42mo9dBPXPXoTXND81Q+bvUe+62kvSpnD4M0ael9lN0W8KezVi2Y/E8pf21z0vS5tCjpqyS+kqtN+t6tVwujf1Yu4WOtTa5tBJ7fdaP1CdJur58s7pO5XwIcWhfY/P3lHOtpmKaz6F3X3ptPO9anq7+9dW+tZDrT5o+FWpLbbuExoU+50QhO13y0oxNXf2VlIHzVzP2j/HeqUSG2iVFS335lTNPqe3c41mM0HC+ds+9BgO7E7oHQRAEQRAEQVv8A9f87is=
   </data>
  </layer>
  <layer id="2" name="Слой тайлов 2" width="188" height="44">
@@ -79,10 +79,8 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="land">
-  <object id="21" x="-1.60417" y="0.1875" width="142.667" height="380"/>
-  <object id="22" x="129.729" y="368.063" width="1278.08" height="172"/>
-  <object id="24" x="641.322" y="208.043" width="59.4638" height="9.44928"/>
-  <object id="25" x="726.601" y="208.609" width="56.1305" height="9.44928"/>
+  <object id="26" x="143.33" y="368" width="498" height="1"/>
+  <object id="27" x="143.73" y="368.45" width="-1" height="-368"/>
  </objectgroup>
  <objectgroup id="4" name="Слой объектов 2">
   <object id="12" name="camera" x="189.333" y="370.667">
