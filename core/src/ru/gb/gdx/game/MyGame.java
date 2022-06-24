@@ -78,19 +78,19 @@ public class MyGame extends ApplicationAdapter {
 		world.createBody(def).createFixture(fdef);
 
 		def.type = BodyDef.BodyType.DynamicBody;
-//		for (int i = 0; i < 10; i++) {
-//			def.position.set(new Vector2(MathUtils.random(100f, 200f), 500f));
-////		def.position.set(new Vector2(150f, 450f));
-//			def.gravityScale = MathUtils.random(0.5f, 500f);
-//			float size = MathUtils.random(3f, 15f);
-//			polygonShape.setAsBox(size,size);
-//			fdef.shape = polygonShape;
-//			fdef.density = 100f;
-//			fdef.friction = 0f;
-//			world.createBody(def).createFixture(fdef);
-////		Body body = world.createBody(def);
-////		body.createFixture(fdef);
-//		}
+		for (int i = 0; i < 10; i++) {
+			def.position.set(new Vector2(MathUtils.random(100f, 200f), 500f));
+//		def.position.set(new Vector2(150f, 450f));
+			def.gravityScale = MathUtils.random(0.5f, 50f);
+			float size = MathUtils.random(3f, 15f);
+			polygonShape.setAsBox(size,size);
+			fdef.shape = polygonShape;
+			fdef.density = 10f;
+			fdef.friction = 0f;
+			world.createBody(def).createFixture(fdef);
+//		Body body = world.createBody(def);
+//		body.createFixture(fdef);
+		}
 
 		def.position.set(new Vector2(270f,265));
 		def.gravityScale = 4f;
@@ -225,7 +225,7 @@ public class MyGame extends ApplicationAdapter {
 //		renderer.rect(heroRect.x, heroRect.y, heroRect.width, heroRect.height);
 //		renderer.end();
 //		if (start)
-			world.step(1/60.0f,3,3);
+			world.step(1/60.0f,30,30);
 		debugRenderer.render(world, camera.combined);
 	}
 
