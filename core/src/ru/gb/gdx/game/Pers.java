@@ -1,6 +1,7 @@
 package ru.gb.gdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -53,5 +54,6 @@ public class Pers {
     public Vector2 getPos() {return pos;}
 
     public Rectangle getRect() {return rect;}
+
 }
 

@@ -3,13 +3,11 @@ package ru.gb.gdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -33,6 +31,8 @@ public class MyGame extends ApplicationAdapter {
 	private List<Coin> coinList;
 	private Texture fon;
 	private Pers chip;
+	private PhysX physX;
+	private boolean start = false;
 
 	private final int SPEED = 3;
 
@@ -44,8 +44,17 @@ public class MyGame extends ApplicationAdapter {
 	public void create () {
 		chip = new Pers();
 		fon = new Texture("fon.png");
-		map = new TmxMapLoader().load("maps/map1.tmx");
+		map = new TmxMapLoader().load("maps/level1.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map);
+
+
+		physX = new PhysX();
+		if (map.getLayers().get("land") != null){
+			MapObjects mo = map.getLayers().get("land").getObjects();
+			physX.addObjects(mo);
+			MapObject pers = map.getLayers().get("land").getObjects().get("camera");
+			physX.addObject(pers);
+		}
 
 		foreGround = new int[1];
 		foreGround[0] = map.getLayers().getIndex("Слой тайлов 2");
@@ -58,9 +67,10 @@ public class MyGame extends ApplicationAdapter {
 		label = new Label(50);
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		RectangleMapObject o = (RectangleMapObject) map.getLayers().get("Слой объектов 2").getObjects().get("camera");
-		camera.position.x = o.getRectangle().x;
-		camera.position.y = o.getRectangle().y;
+		RectangleMapObject o = (RectangleMapObject) map.getLayers().get("land").getObjects().get("camera");
+
+		camera.position.x = physX.getPers().getPosition().x;
+		camera.position.y = physX.getPers().getPosition().y;
 		camera.zoom = 0.5f;
 		camera.update();
 
@@ -85,18 +95,28 @@ public class MyGame extends ApplicationAdapter {
 
 		chip.setWalk(false);
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			camera.position.x-=SPEED;
+			physX.setPersForce(new Vector2(-600.0f,0.0f));
+//			camera.position.x-=SPEED;
 			chip.setDir(true);
 			chip.setWalk(true);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			camera.position.x+=SPEED;
+			physX.setPersForce(new Vector2(600.0f,0.0f));
+//			camera.position.x+=SPEED;
 			chip.setDir(false);
 			chip.setWalk(true);
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)) camera.position.y+=SPEED;
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y-=SPEED;
+		if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+			physX.setPersForce(new Vector2(0.0f,6000.0f));
+//			camera.position.y+=SPEED;
+		}
+		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+			start = true;
+		}
+//		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y-=SPEED;
 
+		camera.position.x = physX.getPers().getPosition().x;
+		camera.position.y = physX.getPers().getPosition().y;
 		camera.update();
 
 		batch.begin();
@@ -129,6 +149,10 @@ public class MyGame extends ApplicationAdapter {
 
 		batch.end();
 
+		if (start)
+			physX.step();
+		physX.debugDraw(camera);
+
 //		renderer.begin(ShapeRenderer.ShapeType.Line);
 //		for (int i=0;i<coinList.size();i++){
 //			coinList.get(i).shapeDraw(renderer, camera);
@@ -156,5 +180,6 @@ public class MyGame extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		coinList.get(0).dispose();
+		physX.dispose();
 	}
 }
