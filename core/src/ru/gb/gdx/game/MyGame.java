@@ -1,8 +1,10 @@
 package ru.gb.gdx.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,14 +17,17 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
 public class MyGame extends ApplicationAdapter {
-	private SpriteBatch batch;
+	public static SpriteBatch batch;
 //	private ShapeRenderer renderer;
 	private Label label;
 	private TiledMap map;
@@ -32,7 +37,9 @@ public class MyGame extends ApplicationAdapter {
 	private Texture fon;
 	private Pers chip;
 	private PhysX physX;
+	float gs,persFriction,persRest;
 	private boolean start = false;
+	private Music music;
 
 	private final int SPEED = 3;
 
@@ -42,6 +49,7 @@ public class MyGame extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+
 		chip = new Pers();
 		fon = new Texture("fon.png");
 		map = new TmxMapLoader().load("maps/level1.tmx");
@@ -54,12 +62,15 @@ public class MyGame extends ApplicationAdapter {
 			physX.addObjects(mo);
 			MapObject pers = map.getLayers().get("land").getObjects().get("camera");
 			physX.addObject(pers);
+			gs = physX.getPers().getGravityScale();
+			persFriction = physX.getPers().getFixtureList().get(0).getFriction();
+			persRest = physX.getPers().getFixtureList().get(0).getRestitution();
 		}
 
-		foreGround = new int[1];
-		foreGround[0] = map.getLayers().getIndex("Слой тайлов 2");
-		backGround = new int[1];
-		backGround[0] = map.getLayers().getIndex("Слой тайлов 1");
+//		foreGround = new int[1];
+		backGround = new int[2];
+		backGround[0] = map.getLayers().getIndex("Слой тайлов 2");
+		backGround[1] = map.getLayers().getIndex("Слой тайлов 1");
 
 		batch = new SpriteBatch();
 //		renderer = new ShapeRenderer();
@@ -87,6 +98,10 @@ public class MyGame extends ApplicationAdapter {
 			}
 		}
 
+		music = Gdx.audio.newMusic(Gdx.files.internal("Soundtracks — Чип и Дейл (Disney, 1989) (www.lightaudio.ru).mp3"));
+		music.setLooping(true);
+		music.setVolume(0.025f);
+		music.play();
 	}
 
 	@Override
@@ -95,23 +110,53 @@ public class MyGame extends ApplicationAdapter {
 
 		chip.setWalk(false);
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			physX.setPersForce(new Vector2(-600.0f,0.0f));
+			if (physX.cl.isOnGround()) {
+				physX.setPersForce(new Vector2(-600.0f, 0.0f));
 //			camera.position.x-=SPEED;
-			chip.setDir(true);
-			chip.setWalk(true);
+				chip.setDir(true);
+				chip.setWalk(true);
+			} else {
+				physX.setPersForce(new Vector2(-60.0f, 0.0f));
+			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			physX.setPersForce(new Vector2(600.0f,0.0f));
+			if (physX.cl.isOnGround()) {
+				physX.setPersForce(new Vector2(600.0f, 0.0f));
 //			camera.position.x+=SPEED;
-			chip.setDir(false);
-			chip.setWalk(true);
+				chip.setDir(false);
+				chip.setWalk(true);
+			} else {
+				physX.setPersForce(new Vector2(60.0f, 0.0f));
+			}
 		}
-		if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-			physX.setPersForce(new Vector2(0.0f,6000.0f));
+
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			if (physX.cl.isOnGround() && (!physX.cl.isClimb()))
+				physX.setPersForce(new Vector2(0.0f,600.0f));
+			else if (physX.cl.isClimb())
+				physX.setPersForce(new Vector2(0.0f, 20.0f));
 //			camera.position.y+=SPEED;
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 			start = true;
+			physX.getPers().setGravityScale(gs);
+			physX.getPers().getFixtureList().get(0).setFriction(persFriction);
+			physX.getPers().getFixtureList().get(0).setRestitution(persRest);
+			physX.setPersForce(new Vector2(0.0f, 1500.0f));
+			physX.setPersForce(new Vector2(1500.0f, 0.0f));
+		}
+
+		if (physX.cl.isClimb()){
+			start = false;
+			physX.getPers().setGravityScale(0.0f);
+			physX.getPers().getFixtureList().get(0).setFriction(100.0f);
+			physX.getPers().getFixtureList().get(0).setRestitution(0.0f);
+//			physX.setPersForce(new Vector2(0.0f, 10.0f));
+		} else {
+			start = true;
+			physX.getPers().setGravityScale(gs);
+			physX.getPers().getFixtureList().get(0).setFriction(persFriction);
+			physX.getPers().getFixtureList().get(0).setRestitution(persRest);
 		}
 //		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y-=SPEED;
 
@@ -132,11 +177,16 @@ public class MyGame extends ApplicationAdapter {
 
 		ListIterator<Coin> iterator = coinList.listIterator();
 		while (iterator.hasNext()) {
+			int state;
+
 			Coin current = iterator.next();
-			current.draw(batch, camera);
+			state = current.draw(batch, camera);
 			if (current.isOverlaps(chip.getRect(), camera)) {
-				iterator.remove();
-				score++;
+				if (state==0) current.setState();
+				if (state==1) {
+					iterator.remove();
+					score++;
+				}
 			}
 		}
 //		for (int i=0;i<coinList.size();i++){
@@ -149,9 +199,9 @@ public class MyGame extends ApplicationAdapter {
 
 		batch.end();
 
-		if (start)
+//		if (start)
 			physX.step();
-		physX.debugDraw(camera);
+//		physX.debugDraw(camera);
 
 //		renderer.begin(ShapeRenderer.ShapeType.Line);
 //		for (int i=0;i<coinList.size();i++){
@@ -181,5 +231,8 @@ public class MyGame extends ApplicationAdapter {
 		batch.dispose();
 		coinList.get(0).dispose();
 		physX.dispose();
+		music.stop();
+		music.dispose();
 	}
+
 }

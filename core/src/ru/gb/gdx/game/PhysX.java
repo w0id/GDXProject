@@ -17,10 +17,13 @@ public class PhysX {
 
     private final Box2DDebugRenderer debugRenderer;
     private Body pers;
+    public Contact cl;
 
     public PhysX() {
 //        world = new World(new Vector2(0,-9.81f), true);
         debugRenderer = new Box2DDebugRenderer();
+        cl = new Contact();
+        world.setContactListener(cl);
     }
 
     public Body getPers() {
@@ -88,6 +91,17 @@ public class PhysX {
         if (obj.getName().equals("camera")) {
             pers = world.createBody(def);
             pers.createFixture(fdef).setUserData(name);
+
+            poly_h.setAsBox(4.0f,2.0f, new Vector2(4.5f,-0.5f),0);
+            fdef.shape = poly_h;
+            fdef.isSensor = true;
+            pers.createFixture(fdef).setUserData("sensor");
+
+            poly_h.setAsBox(2.0f,7.25f,new Vector2(-0.5f,7.25f),0);
+            fdef.shape = poly_h;
+            fdef.isSensor = true;
+            pers.createFixture(fdef).setUserData("left_sensor");
+
         } else {
             world.createBody(def).createFixture(fdef).setUserData(name);
         }
@@ -139,9 +153,11 @@ public class PhysX {
             fdef.density = (float) obj.getProperties().get("density");
             fdef.friction = (float) obj.getProperties().get("friction");
 
-            if ((obj.getName() == null) || !(obj.getName().equals("camera"))) {
+            if (obj.getName() == null)
                 world.createBody(def).createFixture(fdef).setUserData(name);
-            }
+            else if (obj.getName().equals("rope"))
+                world.createBody(def).createFixture(fdef).setUserData("rope");
+
         }
 
 
