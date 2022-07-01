@@ -189,41 +189,12 @@ public class MyGame extends ApplicationAdapter {
 				}
 			}
 		}
-//		for (int i=0;i<coinList.size();i++){
-//			coinList.get(i).draw(batch, camera);
-//			if (coinList.get(i).isOverlaps(chip.getRect(), camera)) {
-//				coinList.remove(i);
-//				score++;
-//			}
-//		}
 
 		batch.end();
 
 //		if (start)
 			physX.step();
 //		physX.debugDraw(camera);
-
-//		renderer.begin(ShapeRenderer.ShapeType.Line);
-//		for (int i=0;i<coinList.size();i++){
-//			coinList.get(i).shapeDraw(renderer, camera);
-//		}
-//		renderer.end();
-
-//		Color heroClr = new Color(Color.WHITE);
-//		mapRenderer.render(foreGround);
-//		renderer.setColor(heroClr);
-//		renderer.begin(ShapeRenderer.ShapeType.Line);
-//		for (int i=0;i<coinList.size();i++){
-//			coinList.get(i).shapeDraw(renderer, camera);
-//			if (coinList.get(i).isOverlaps(chip.getRect(), camera)) {
-//				coinList.remove(i);
-//				heroClr = Color.BLUE;
-//			}
-//		}
-//		renderer.setColor(heroClr);
-//		renderer.rect(heroRect.x, heroRect.y, heroRect.width, heroRect.height);
-//		renderer.end();
-
 	}
 
 	@Override

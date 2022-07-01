@@ -20,7 +20,6 @@ public class PhysX {
     public Contact cl;
 
     public PhysX() {
-//        world = new World(new Vector2(0,-9.81f), true);
         debugRenderer = new Box2DDebugRenderer();
         cl = new Contact();
         world.setContactListener(cl);
@@ -50,7 +49,6 @@ public class PhysX {
     public void addObject(MapObject obj) {
         BodyDef def = new BodyDef();
         FixtureDef fdef = new FixtureDef();
-//        PolygonShape poly_h = new PolygonShape();
         CircleShape circle = new CircleShape();
 
         switch ((String) obj.getProperties().get("type")) {
