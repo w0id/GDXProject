@@ -30,14 +30,31 @@ public class Contact implements ContactListener {
             if ((((String)fa.getUserData()).equals("left_sensor")) && (((String)fb.getUserData()).equals("rope"))) {
                 climb++;
             }
+
+            if (((String)fb.getUserData()).equals("enemy") && ((String)fa.getUserData()).equals("activator")) {
+                fb.getBody().setAwake(true);
+            }
+
+            if (((String)fb.getUserData()).equals("Pers") && ((String)fa.getUserData()).equals("annihilator")) {
+                Gdx.app.exit();
+            }
         }
 
         if (fb.getUserData() != null) {
             if (((String)fb.getUserData()).equals("sensor")) {
                 count++;
             }
+
             if ((((String)fb.getUserData()).equals("left_sensor")) && (((String)fa.getUserData()).equals("rope"))) {
                 climb++;
+            }
+
+            if (((String)fa.getUserData()).equals("enemy") && ((String)fb.getUserData()).equals("activator")) {
+                fa.getBody().setAwake(true);
+            }
+
+            if (((String)fa.getUserData()).equals("Pers") && ((String)fb.getUserData()).equals("annihilator")) {
+                Gdx.app.exit();
             }
         }
     }

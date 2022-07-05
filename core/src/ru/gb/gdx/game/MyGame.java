@@ -67,13 +67,11 @@ public class MyGame extends ApplicationAdapter {
 			persRest = physX.getPers().getFixtureList().get(0).getRestitution();
 		}
 
-//		foreGround = new int[1];
 		backGround = new int[2];
 		backGround[0] = map.getLayers().getIndex("Слой тайлов 2");
 		backGround[1] = map.getLayers().getIndex("Слой тайлов 1");
 
 		batch = new SpriteBatch();
-//		renderer = new ShapeRenderer();
 
 		label = new Label(50);
 
@@ -112,7 +110,6 @@ public class MyGame extends ApplicationAdapter {
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
 			if (physX.cl.isOnGround()) {
 				physX.setPersForce(new Vector2(-600.0f, 0.0f));
-//			camera.position.x-=SPEED;
 				chip.setDir(true);
 				chip.setWalk(true);
 			} else {
@@ -122,7 +119,6 @@ public class MyGame extends ApplicationAdapter {
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
 			if (physX.cl.isOnGround()) {
 				physX.setPersForce(new Vector2(600.0f, 0.0f));
-//			camera.position.x+=SPEED;
 				chip.setDir(false);
 				chip.setWalk(true);
 			} else {
@@ -135,7 +131,6 @@ public class MyGame extends ApplicationAdapter {
 				physX.setPersForce(new Vector2(0.0f,600.0f));
 			else if (physX.cl.isClimb())
 				physX.setPersForce(new Vector2(0.0f, 20.0f));
-//			camera.position.y+=SPEED;
 		}
 		if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
 			start = true;
@@ -151,14 +146,12 @@ public class MyGame extends ApplicationAdapter {
 			physX.getPers().setGravityScale(0.0f);
 			physX.getPers().getFixtureList().get(0).setFriction(100.0f);
 			physX.getPers().getFixtureList().get(0).setRestitution(0.0f);
-//			physX.setPersForce(new Vector2(0.0f, 10.0f));
 		} else {
 			start = true;
 			physX.getPers().setGravityScale(gs);
 			physX.getPers().getFixtureList().get(0).setFriction(persFriction);
 			physX.getPers().getFixtureList().get(0).setRestitution(persRest);
 		}
-//		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) camera.position.y-=SPEED;
 
 		camera.position.x = physX.getPers().getPosition().x;
 		camera.position.y = physX.getPers().getPosition().y;
@@ -192,9 +185,8 @@ public class MyGame extends ApplicationAdapter {
 
 		batch.end();
 
-//		if (start)
 			physX.step();
-//		physX.debugDraw(camera);
+		physX.debugDraw(camera);
 	}
 
 	@Override
