@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+//import jdk.internal.vm.compiler.word.WordBase;
 
 import java.util.Iterator;
 
@@ -16,11 +17,13 @@ public class PhysX {
     PolygonShape poly_h = new PolygonShape();
 
     private final Box2DDebugRenderer debugRenderer;
-    private Body pers;
+    private Body pers, enemy;
+    public Contact cl;
 
     public PhysX() {
-//        world = new World(new Vector2(0,-9.81f), true);
         debugRenderer = new Box2DDebugRenderer();
+        cl = new Contact();
+        world.setContactListener(cl);
     }
 
     public Body getPers() {
@@ -47,7 +50,6 @@ public class PhysX {
     public void addObject(MapObject obj) {
         BodyDef def = new BodyDef();
         FixtureDef fdef = new FixtureDef();
-//        PolygonShape poly_h = new PolygonShape();
         CircleShape circle = new CircleShape();
 
         switch ((String) obj.getProperties().get("type")) {
@@ -87,9 +89,25 @@ public class PhysX {
 
         if (obj.getName().equals("camera")) {
             pers = world.createBody(def);
-            pers.createFixture(fdef).setUserData(name);
+            pers.createFixture(fdef).setUserData(obj.getProperties().get("name"));
+
+            poly_h.setAsBox(4.0f,2.0f, new Vector2(4.5f,-0.5f),0);
+            fdef.shape = poly_h;
+            fdef.isSensor = true;
+            pers.createFixture(fdef).setUserData("sensor");
+
+            poly_h.setAsBox(2.0f,7.25f,new Vector2(-0.5f,7.25f),0);
+            fdef.shape = poly_h;
+            fdef.isSensor = true;
+            pers.createFixture(fdef).setUserData("left_sensor");
+
+            circle.setRadius(100.0f);
+            fdef.shape = circle;
+            fdef.isSensor = true;
+            pers.createFixture(fdef).setUserData("activator");
+
         } else {
-            world.createBody(def).createFixture(fdef).setUserData(name);
+            world.createBody(def).createFixture(fdef).setUserData(obj.getProperties().get("name"));
         }
 
         poly_h.dispose();
@@ -105,6 +123,7 @@ public class PhysX {
         Iterator<MapObject> objectIterator = objects.iterator();
         while (objectIterator.hasNext()) {
             MapObject obj = objectIterator.next();
+            fdef.isSensor = false;
             switch ((String) obj.getProperties().get("type")) {
                 case "StaticBody":
                     def.type = BodyDef.BodyType.StaticBody;
@@ -135,15 +154,26 @@ public class PhysX {
             }
 
             def.gravityScale = (float) obj.getProperties().get("gravityScale");
+            def.awake = (boolean) obj.getProperties().get("awake");
             fdef.restitution = (float) obj.getProperties().get("restitution");
             fdef.density = (float) obj.getProperties().get("density");
             fdef.friction = (float) obj.getProperties().get("friction");
 
-            if ((obj.getName() == null) || !(obj.getName().equals("camera"))) {
-                world.createBody(def).createFixture(fdef).setUserData(name);
-            }
-        }
+            if (obj.getName() == null)
+                world.createBody(def).createFixture(fdef).setUserData(obj.getProperties().get("name"));
+            else if (obj.getName().equals("rope"))
+                world.createBody(def).createFixture(fdef).setUserData("rope");
+            else if (obj.getName().equals("enemy")) {
+                enemy = world.createBody(def);
+                enemy.createFixture(fdef).setUserData(obj.getProperties().get("name"));
 
+                circle.setRadius(15.0f);
+                fdef.shape = circle;
+                fdef.isSensor = true;
+                enemy.createFixture(fdef).setUserData("annihilator");
+            }
+
+        }
 
         poly_h.dispose();
         circle.dispose();
