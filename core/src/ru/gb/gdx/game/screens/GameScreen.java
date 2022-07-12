@@ -123,7 +123,7 @@ public class GameScreen implements Screen {
 
         camera.position.x = physX.getPers().getPosition().x;
         camera.position.y = physX.getPers().getPosition().y;
-        camera.zoom = 0.25f;
+        camera.zoom = 0.5f;
         camera.update();
 
         coinList = new ArrayList<>();
