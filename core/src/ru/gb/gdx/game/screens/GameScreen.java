@@ -41,9 +41,8 @@ public class GameScreen implements Screen {
     private OrthogonalTiledMapRenderer mapRenderer;
     private OrthographicCamera camera;
     private List<Coin> coinList;
-    private Texture fon, pumpkin, hearts, rT, dT, lT, uT;
-//    private TextureRegion right, left, up, down;
-    private Button right, left, up, down;
+    private Texture fon, pumpkin, hearts;
+    private Button right, left, up;
     private Pers chip;
     private PhysX physX;
     private Music music;
@@ -75,19 +74,15 @@ public class GameScreen implements Screen {
         hearts = new Texture("heart3.png");
 
         right = new Button(new TextureRegion());
-//        down = new Button(new TextureRegion());
         left = new Button(new TextureRegion());
         up = new Button(new TextureRegion());
 
         right.textureRegion.setTexture(new Texture("right.png"));
-//        down.textureRegion.setTexture(new Texture("down.png"));
         left.textureRegion.setTexture(new Texture("left.png"));
         up.textureRegion.setTexture(new Texture("up.png"));
 
         right.width = right.textureRegion.getTexture().getWidth();
         right.height = right.textureRegion.getTexture().getHeight();
-//        down.width = down.textureRegion.getTexture().getWidth();
-//        down.height = down.textureRegion.getTexture().getHeight();
         left.width = left.textureRegion.getTexture().getWidth();
         left.height = left.textureRegion.getTexture().getHeight();
         up.width = up.textureRegion.getTexture().getWidth();
@@ -97,8 +92,6 @@ public class GameScreen implements Screen {
         up.y = hearts.getHeight() + left.height + 5.0f;
         right.x = Gdx.graphics.getWidth()-right.width-5.0f;
         right.y = hearts.getHeight() + 5.0f;
-//        down.x = Gdx.graphics.getWidth()-right.width-down.width-5.0f;
-//        down.y = hearts.getHeight() + 5.0f;
         left.x = Gdx.graphics.getWidth()-right.width-up.width-left.width-5.0f;
         left.y = hearts.getHeight() + 5.0f;
 
