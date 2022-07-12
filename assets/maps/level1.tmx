@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="188" height="44" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="126">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="188" height="44" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="142">
  <properties>
   <property name="фон" value="fon.png"/>
  </properties>
@@ -131,11 +131,15 @@
   <object id="62" name="camera" x="177" y="356.5" width="18" height="29">
    <properties>
     <property name="awake" type="bool" value="true"/>
+    <property name="climbForce" type="float" value="20"/>
     <property name="density" type="float" value="0"/>
+    <property name="flyForce" type="float" value="30"/>
     <property name="friction" type="float" value="1"/>
     <property name="gravityScale" type="float" value="4"/>
+    <property name="jumpForce" type="float" value="600"/>
     <property name="name" value="Pers"/>
     <property name="restitution" type="float" value="0"/>
+    <property name="runForce" type="float" value="400"/>
     <property name="shape" value="rect"/>
     <property name="type" value="DynamicBody"/>
    </properties>
@@ -284,7 +288,7 @@
     <property name="type" value="StaticBody"/>
    </properties>
   </object>
-  <object id="63" name="enemy" x="284.833" y="269.167" width="20.6667" height="24.3333">
+  <object id="63" name="enemy" x="284.833" y="269.167" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -297,7 +301,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="67" name="enemy" x="446.167" y="215.5" width="20.6667" height="24.3333">
+  <object id="67" name="enemy" x="446.167" y="215.5" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -310,7 +314,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="69" name="enemy" x="801.667" y="260.334" width="20.6667" height="24.3333">
+  <object id="69" name="enemy" x="801.667" y="311.334" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -323,7 +327,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="71" name="enemy" x="963.001" y="276.667" width="20.6667" height="24.3333">
+  <object id="71" name="enemy" x="963.001" y="276.667" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -336,7 +340,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="73" name="enemy" x="1206.33" y="262.167" width="20.6667" height="24.3333">
+  <object id="73" name="enemy" x="1206.33" y="262.167" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -349,7 +353,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="74" name="enemy" x="1367.67" y="222.5" width="20.6667" height="24.3333">
+  <object id="74" name="enemy" x="1367.67" y="285.5" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -362,7 +366,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="76" name="enemy" x="1542.5" y="247.667" width="20.6667" height="24.3333">
+  <object id="76" name="enemy" x="1542.5" y="247.667" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -375,7 +379,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="78" name="enemy" x="1879.58" y="208.917" width="20.6667" height="24.3333">
+  <object id="78" name="enemy" x="1879.58" y="208.917" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -388,7 +392,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="80" name="enemy" x="2026.08" y="154.084" width="20.6667" height="24.3333">
+  <object id="80" name="enemy" x="2026.08" y="154.084" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -401,7 +405,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="120" name="enemy" x="2110.88" y="302.985" width="20.6667" height="24.3333">
+  <object id="120" name="enemy" x="2110.88" y="302.985" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -414,7 +418,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="121" name="enemy" x="672.242" y="124.197" width="20.6667" height="24.3333">
+  <object id="121" name="enemy" x="672.242" y="124.197" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -427,7 +431,7 @@
    </properties>
    <ellipse/>
   </object>
-  <object id="122" name="enemy" x="2512.27" y="260.318" width="20.6667" height="24.3333">
+  <object id="122" name="enemy" x="2512.27" y="260.318" width="11" height="11">
    <properties>
     <property name="awake" type="bool" value="false"/>
     <property name="density" type="float" value="10"/>
@@ -439,6 +443,18 @@
     <property name="type" value="DynamicBody"/>
    </properties>
    <ellipse/>
+  </object>
+  <object id="140" name="abyss" x="-1116" y="576" width="5336" height="36">
+   <properties>
+    <property name="awake" type="bool" value="true"/>
+    <property name="density" type="float" value="0"/>
+    <property name="friction" type="float" value="0"/>
+    <property name="gravityScale" type="float" value="0"/>
+    <property name="name" value="abyss"/>
+    <property name="restitution" type="float" value="0"/>
+    <property name="shape" value="rect"/>
+    <property name="type" value="StaticBody"/>
+   </properties>
   </object>
  </objectgroup>
  <objectgroup id="6" name="Слой объектов 3"/>

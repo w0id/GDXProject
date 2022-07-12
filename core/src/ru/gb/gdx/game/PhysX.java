@@ -1,6 +1,8 @@
 package ru.gb.gdx.game;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.EllipseMapObject;
@@ -8,9 +10,12 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 //import jdk.internal.vm.compiler.word.WordBase;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class PhysX {
     private final World world = new World(new Vector2(0,-9.81f), true);
@@ -19,11 +24,29 @@ public class PhysX {
     private final Box2DDebugRenderer debugRenderer;
     private Body pers, enemy;
     public Contact cl;
+    public List<Fixture> enemyBodys;
+    private float jumpForce, runForce, climbForce, flyForce;
 
     public PhysX() {
         debugRenderer = new Box2DDebugRenderer();
         cl = new Contact();
         world.setContactListener(cl);
+    }
+
+    public float getJumpForce() {
+        return jumpForce;
+    }
+
+    public float getRunForce() {
+        return runForce;
+    }
+
+    public float getClimbForce() {
+        return climbForce;
+    }
+
+    public float getFlyForce() {
+        return flyForce;
     }
 
     public Body getPers() {
@@ -86,6 +109,10 @@ public class PhysX {
         fdef.restitution = (float) obj.getProperties().get("restitution");
         fdef.density = (float) obj.getProperties().get("density");
         fdef.friction = (float) obj.getProperties().get("friction");
+        jumpForce = (float) obj.getProperties().get("jumpForce");
+        runForce = (float) obj.getProperties().get("runForce");
+        climbForce = (float) obj.getProperties().get("climbForce");
+        flyForce = (float) obj.getProperties().get("flyForce");
 
         if (obj.getName().equals("camera")) {
             pers = world.createBody(def);
@@ -96,7 +123,7 @@ public class PhysX {
             fdef.isSensor = true;
             pers.createFixture(fdef).setUserData("sensor");
 
-            poly_h.setAsBox(2.0f,7.25f,new Vector2(-0.5f,7.25f),0);
+            poly_h.setAsBox(2.0f,6.25f,new Vector2(-0.5f,8.25f),0);
             fdef.shape = poly_h;
             fdef.isSensor = true;
             pers.createFixture(fdef).setUserData("left_sensor");
@@ -167,15 +194,31 @@ public class PhysX {
                 enemy = world.createBody(def);
                 enemy.createFixture(fdef).setUserData(obj.getProperties().get("name"));
 
-                circle.setRadius(15.0f);
+                circle.setRadius(circle.getRadius()+1f);
                 fdef.shape = circle;
                 fdef.isSensor = true;
                 enemy.createFixture(fdef).setUserData("annihilator");
+            } else if (obj.getName().equals("abyss")) {
+                fdef.isSensor = true;
+                world.createBody(def).createFixture(fdef).setUserData("abyss");
             }
 
         }
 
         poly_h.dispose();
         circle.dispose();
+    }
+
+    public int enemyInit() {
+        Array<Fixture> fixtureArray = new Array<>(world.getBodyCount());
+        world.getFixtures(fixtureArray);
+        enemyBodys = new ArrayList<Fixture>();
+        for (Fixture bdy: fixtureArray) {
+            if (bdy.getUserData() != null) {
+                String name = (String) bdy.getUserData();
+                if (name.equals("enemy")){enemyBodys.add(bdy);}
+            }
+        }
+        return enemyBodys.size();
     }
 }
