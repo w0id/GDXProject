@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import javax.sound.midi.Soundbank;
-
 public class Coin {
     private AnimPlayer animPlayer;
     private Vector2 position;
